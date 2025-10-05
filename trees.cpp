@@ -17,6 +17,7 @@ void insertRecursive(BSTNode*& root, int value);
 void insertIterative(BSTNode*& root, int value);
 bool searchRecursive(BSTNode* root, int key);
 bool searchIterative(BSTNode* root, int key);
+void inorderPrint(BSTNode* root);
 
 int main() {
 
@@ -111,4 +112,24 @@ bool searchIterative(BSTNode* root, int key) {
          }
      }
        return false;
+}
+
+void inorderPrint(BSTNode* root) {
+    if(!root) {
+        return;
+    }
+
+    inorderPrint(root->left);
+     cout << root->data << " ";
+    inorderPrint(root->right);
+}
+
+void freeTree(BSTNode* root) {
+    if(!root){
+        return;
+    }
+
+    freeTree(root->left);
+    freeTree(root->right);
+    delete root;
 }
