@@ -18,6 +18,7 @@ void insertIterative(BSTNode*& root, int value);
 bool searchRecursive(BSTNode* root, int key);
 bool searchIterative(BSTNode* root, int key);
 void inorderPrint(BSTNode* root);
+void freeTree(BSTNode* root);
 
 int main() {
 
