@@ -20,6 +20,7 @@ bool searchIterative(BSTNode* root, int key);
 void inorderPrint(BSTNode* root);
 void freeTree(BSTNode* root);
 BSTNode* minValueNode(BSTNode* root);
+void deleteRecursive(BSTNode*& root, int key);
 
 int main() {
      BSTNode* root = nullptr;
@@ -170,4 +171,39 @@ BSTNode* minValueNode(BSTNode* root) {
       }
 
       return cur;
+}
+
+void deleteRecursive(BSTNode*& root, int key) {
+     if(!root) {
+        return;
+     }
+
+     if(key < root->data) {
+        deleteRecursive(root->left, key);
+     }
+
+     else if (key > root->data) {
+        deleteRecursive(root->right, key);
+     }
+
+     else {
+            if (!root->left && !root->right) {
+               delete root;
+               root = nullptr;
+            }
+     
+
+        else if(!root->left || !root->left) {
+           BSTNode* child   = root->left ? root->left : root->right;
+           delete root;
+           root = child;
+        }
+
+
+        else {
+           BSTNode* succ = minValueNode(root->right);
+           root->data = succ->data;
+           deleteRecursive(root->right, succ->data);
+        }
+  } 
 }
