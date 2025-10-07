@@ -19,8 +19,32 @@ bool searchRecursive(BSTNode* root, int key);
 bool searchIterative(BSTNode* root, int key);
 void inorderPrint(BSTNode* root);
 void freeTree(BSTNode* root);
+BSTNode* minValueNode(BSTNode* root);
 
 int main() {
+     BSTNode* root = nullptr;
+     
+     insertRecursive(root, 8);
+    insertIterative(root, 3);
+    insertIterative(root, 10);
+    insertRecursive(root, 1);
+    insertRecursive(root, 6);
+    insertIterative(root, 14);
+    insertRecursive(root, 4);
+    insertIterative(root, 7);
+    insertRecursive(root, 13);
+
+    cout << "Inorder traversal: ";
+    inorderPrint(root);
+    cout << "\n";
+
+    cout << "Search 7 (rec): " <<
+        (searchRecursive(root,7)?"Found":"Not Found") << "\n";
+    cout << "Search 9 (it): "  << 
+        (searchIterative(root,9)?"Found":"Not Found") << "\n";
+
+   // Always free dynamically allocated memory
+    freeTree(root);
 
 
     return 0;
@@ -133,4 +157,17 @@ void freeTree(BSTNode* root) {
     freeTree(root->left);
     freeTree(root->right);
     delete root;
+}
+
+BSTNode* minValueNode(BSTNode* root) {
+     if(!root) {
+        return nullptr;
+     }
+
+     BSTNode* cur = root;
+      while(cur->left) {
+        cur = cur->left;
+      }
+
+      return cur;
 }
