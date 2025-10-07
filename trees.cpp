@@ -35,7 +35,7 @@ int main() {
     insertIterative(root, 7);
     insertRecursive(root, 13);
 
-    cout << "Inorder traversal: ";
+   cout << "Inorder traversal: ";
     inorderPrint(root);
     cout << "\n";
 
@@ -44,8 +44,27 @@ int main() {
     cout << "Search 9 (it): "  << 
         (searchIterative(root,9)?"Found":"Not Found") << "\n";
 
-   // Always free dynamically allocated memory
+
+
+        // Perform deletions using deleteRecursive
+    cout << "\n--- Performing deletions ---\n";
+
+    cout << "Deleting 1 (leaf)...\n";
+    deleteRecursive(root, 1);
+    cout << "Deleting 14 (one child)...\n";
+    deleteRecursive(root, 14);
+    cout << "Deleting 8 (two children / root)...\n";
+    deleteRecursive(root, 8);
+
+
+         cout << "\nInorder traversal after deletions: ";
+    inorderPrint(root);
+    cout << "\n";
+
+    // Free all dynamically allocated nodes
     freeTree(root);
+    root = nullptr;
+
 
 
     return 0;
@@ -193,7 +212,7 @@ void deleteRecursive(BSTNode*& root, int key) {
             }
      
 
-        else if(!root->left || !root->left) {
+        else if(!root->left || !root->right) {
            BSTNode* child   = root->left ? root->left : root->right;
            delete root;
            root = child;
